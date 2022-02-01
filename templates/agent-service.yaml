@@ -25,5 +25,5 @@ spec:
       targetPort: {{ .Values.zabbixAgent.service.targetPort }}
       protocol: TCP
       name: {{ .Values.zabbixAgent.service.portName }}
-    name: zabbix-proxy
-  type: {{ .Values.zabbixAgent.service.type | quote }}
+  selector:
+    name: zabbix-agent
