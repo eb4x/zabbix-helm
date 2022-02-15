@@ -39,19 +39,16 @@ Install requirement [kubectl](https://kubernetes.io/docs/reference/kubectl/overv
 
 # How to Deploy Zabbix in Kubernetes
 
-Clone this repository:
+Add repository:
 
 ```bash
-cd ~
-git clone https://git.zabbix.com/scm/zt/kubernetes-helm.git
-cd kubernetes-helm
-git checkout release/6.0
+helm repo add zabbix-chart-6.0  https://cdn.zabbix.com/zabbix/integrations/kubernetes-helm/6.0
 ```
 
 Export default values of chart ``helm-zabbix`` to file ``$HOME/zabbix_values.yaml``:
 
 ```bash
-helm show values . > $HOME/zabbix_values.yaml
+helm show values zabbix-chart-6.0/zabbix-helm-chrt > $HOME/zabbix_values.yaml
 ```
 Change the values according to the environment in the file ``$HOME/zabbix_values.yaml``.
 
@@ -71,7 +68,7 @@ kubectl create namespace monitoring
 Deploy Zabbix in the Kubernetes cluster. (Update the YAML files paths if necessary).
 
 ```bash
-helm install zabbix . --dependency-update -f $HOME/zabbix_values.yaml -n monitoring
+helm install zabbix zabbix-chart-6.0/zabbix-helm-chrt --dependency-update -f $HOME/zabbix_values.yaml -n monitoring
 
 ```
 
