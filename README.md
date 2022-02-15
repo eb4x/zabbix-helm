@@ -45,6 +45,7 @@ Clone this repository:
 cd ~
 git clone https://git.zabbix.com/scm/zt/kubernetes-helm.git
 cd kubernetes-helm
+git checkout release/6.2
 
 ```
 

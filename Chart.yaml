@@ -7,7 +7,7 @@ home: https://www.zabbix.com/
 icon: https://assets.zabbix.com/img/logo/zabbix_logo_500x131.png
 
 type: application
-version: 0.0.1
+version: 1.0.0
 appVersion: trunk
 
 dependencies:
