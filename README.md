@@ -8,7 +8,7 @@ This Helm chart installs Zabbix in a Kubernetes cluster.
 
 - Kubernetes cluster 1.18+
 - Helm 3.0+
-- Zabbix server 5.0+
+- Zabbix server 6.0+
 - kube-state-metrics 2.13.2+
 
 *Note*
