@@ -29,13 +29,13 @@ zabbixProxy:
     ## Zabbix proxy Docker image name
     repository: zabbix/zabbix-proxy-sqlite3
     ## Tag of Docker image of Zabbix proxy
-    tag: alpine-6.0.0
+    tag: alpine-6.0.2
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
 
   env:
-    ## The variable allows to switch Zabbix proxy mode. Bu default, value is 1 - passive proxy. Allowed values are 0 and 1.
+    ## The variable allows to switch Zabbix proxy mode. Bu default, value is 0 - active proxy. Allowed values are 0 and 1.
     - name: ZBX_PROXYMODE
       value: 0
     ## Zabbix proxy hostname
@@ -192,7 +192,7 @@ zabbixAgent:
     ## Zabbix agent Docker image name
     repository: zabbix/zabbix-agent2
     ## Tag of Docker image of Zabbix agent
-    tag: alpine-6.0.0
+    tag: alpine-6.0.2
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
