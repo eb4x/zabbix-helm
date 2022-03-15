@@ -43,16 +43,14 @@ Clone this repository:
 
 ```bash
 cd ~
-git clone https://git.zabbix.com/scm/zt/kubernetes-helm.git
-cd kubernetes-helm
-git checkout release/6.2
+helm repo add zabbix-chart-6.2  https://cdn.zabbix.com/zabbix/integrations/kubernetes-helm/6.2
 
 ```
 
 Export default values of chart ``helm-zabbix`` to file ``$HOME/zabbix_values.yaml``:
 
 ```bash
-helm show values . > $HOME/zabbix_values.yaml
+helm show values zabbix-chart-6.2/zabbix-helm-chrt > $HOME/zabbix_values.yaml
 ```
 Change the values according to the environment in the file ``$HOME/zabbix_values.yaml``.
 
