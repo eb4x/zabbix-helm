@@ -24,6 +24,7 @@ serviceAccount:
 zabbixProxy:
   ## Enables use of **Zabbix proxy**
   enabled: true
+  containerSecurityContext: {}
   resources: {}
   image:
     ## Zabbix proxy Docker image name
