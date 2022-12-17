@@ -16,3 +16,16 @@ tests:
             name: zabbix-agent
             containerPort: 10050
             protocol: TCP
+
+  - it: shouldn't have startup/liveness probe or ports
+    set:
+      zabbixAgent.env:
+        - name: ZBX_PASSIVE_ALLOW
+          value: false
+    asserts:
+      - isNull:
+          path: spec.template.spec.containers[0].livenessProbe
+      - isNull:
+          path: spec.template.spec.containers[0].startupProbe
+      - isNull:
+          path: spec.template.spec.containers[0].ports

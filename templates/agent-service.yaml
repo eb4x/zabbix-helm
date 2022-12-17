@@ -1,3 +1,4 @@
+{{- if not (has (dict "name" "ZBX_PASSIVE_ALLOW" "value" false) .Values.zabbixAgent.env) -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,3 +28,4 @@ spec:
       name: {{ .Values.zabbixAgent.service.portName }}
   selector:
     name: zabbix-agent
+{{- end -}}

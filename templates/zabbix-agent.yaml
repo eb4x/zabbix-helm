@@ -40,6 +40,7 @@ spec:
           {{- end }}
           image: "{{ .Values.zabbixAgent.image.repository }}:{{ .Values.zabbixAgent.image.tag }}"
           imagePullPolicy: {{ .Values.zabbixAgent.image.pullPolicy }}
+          {{- if not (has (dict "name" "ZBX_PASSIVE_ALLOW" "value" false) .Values.zabbixAgent.env) }}
           ports:
             - name: zabbix-agent
               containerPort: 10050
@@ -57,6 +58,7 @@ spec:
             timeoutSeconds: 3
             failureThreshold: 3
             periodSeconds: 10
+          {{- end -}}
           {{- if .Values.zabbixAgent.containerSecurityContext }}
           securityContext:
 {{ toYaml .Values.zabbixAgent.containerSecurityContext | nindent 12 }}
