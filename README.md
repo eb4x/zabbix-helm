@@ -21,7 +21,12 @@ kube-state-metrics (Zabbix helm chart dependency) with Openshift installation re
         runAsGroup: 65534
         fsGroup: 65534
 ```
-This block must be removed or changed.
+This block must be removed or changed. You can do this by supplying values to the sub-chart.
+```YAML
+kube-state-metrics:
+  securityContext:
+    enabled: false
+```
 
 ## Zabbix Agent
 

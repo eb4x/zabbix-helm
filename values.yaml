@@ -277,3 +277,7 @@ zabbixAgent:
     pspEnabled: false
     pspAnnotations: {}
 
+## Supply values to sub-chart
+#kube-state-metrics:
+#  securityContext:
+#    enabled: false
