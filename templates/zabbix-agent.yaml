@@ -40,23 +40,24 @@ spec:
           {{- end }}
           image: "{{ .Values.zabbixAgent.image.repository }}:{{ .Values.zabbixAgent.image.tag }}"
           imagePullPolicy: {{ .Values.zabbixAgent.image.pullPolicy }}
+          {{- if not (has (dict "name" "ZBX_PASSIVE_ALLOW" "value" false) .Values.zabbixAgent.env) }}
           ports:
             - name: zabbix-agent
               containerPort: {{ .Values.zabbixAgent.service.port }}
               protocol: TCP
-          {{- with .Values.zabbixAgent.livenessProbe }}
+          {{-   with .Values.zabbixAgent.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.zabbixAgent.readinessProbe }}
+          {{-   end }}
+          {{-   with .Values.zabbixAgent.readinessProbe }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.zabbixAgent.startupProbe }}
+          {{-   end }}
+          {{-   with .Values.zabbixAgent.startupProbe }}
           startupProbe:
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-
+          {{-   end }}
+          {{- end -}}
           {{- if .Values.zabbixAgent.containerSecurityContext }}
           securityContext:
 {{ toYaml .Values.zabbixAgent.containerSecurityContext | nindent 12 }}
