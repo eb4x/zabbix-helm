@@ -1,0 +1,19 @@
+suite: test zabbix-proxy
+templates:
+  - zabbix-proxy.yaml
+tests:
+  - it: defaults to
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: ^zabbix-proxy
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zabbix/zabbix-proxy-sqlite3:alpine-6.0.21
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: storage-volume
+            emptyDir: {}
