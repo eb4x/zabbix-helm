@@ -52,6 +52,15 @@ Kubernetes API, kube-state-metrics endpoint and Zabbix agents (if deployed) must
 - Zabbix server 6.0+
 - kube-state-metrics 2.2.0, 2.9.2
 
+# Testing
+
+Developers wanting to change the templates, some basic unittesting can be introduced to catch whether or not you break something in the templates by installling the unittest plugin for helm,
+```bash
+helm plugin install https://github.com/helm-unittest/helm-unittest
+helm unittest .
+```
+and editing or adding files under `tests/`.
+
 # Installation
 
 Install the [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) and [helm](https://helm.sh/docs/) tools following the instructions.

@@ -1,0 +1,18 @@
+suite: test zabbix-agent
+templates:
+  - zabbix-agent.yaml
+tests:
+  - it: defaults to
+    asserts:
+      - isKind:
+          of: DaemonSet
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].livenessProbe
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].startupProbe
+      - contains:
+          path: spec.template.spec.containers[0].ports
+          content:
+            name: zabbix-agent
+            containerPort: 10050
+            protocol: TCP
