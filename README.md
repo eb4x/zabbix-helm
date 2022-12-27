@@ -32,6 +32,15 @@ This block must be removed or changed.
 
 **Zabbix proxy** is a process that may collect monitoring data from one or more monitored devices and send the information to the Zabbix server, essentially working on behalf of the server. All collected data is buffered locally and then transferred to the external **Zabbix server** the proxy belongs to.
 
+# Testing
+
+Developers wanting to change the templates, some basic unittesting can be introduced to catch whether or not you break something in the templates by installling the unittest plugin for helm,
+```bash
+helm plugin install https://github.com/quintush/helm-unittest
+helm unittest -3 .
+```
+and editing or adding files under `tests/`.
+
 # Installation
 
 Install requirement [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) and [helm](https://helm.sh/docs/) following the instructions.
