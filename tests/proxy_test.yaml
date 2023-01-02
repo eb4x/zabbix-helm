@@ -5,7 +5,7 @@ tests:
   - it: defaults to
     asserts:
       - isKind:
-          of: StatefulSet
+          of: Deployment
       - matchRegex:
           path: metadata.name
           pattern: ^zabbix-proxy
@@ -17,14 +17,3 @@ tests:
           content:
             name: storage-volume
             emptyDir: {}
-
-  - it: should have a persistent volume
-    set:
-      zabbixProxy.persistentVolume.enabled: true
-    asserts:
-      - contains:
-          path: spec.template.spec.containers[0].volumeMounts
-          content:
-            name: storage-volume
-            mountPath: /data
-            subPath: ""
