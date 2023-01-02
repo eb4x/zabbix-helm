@@ -1,0 +1,12 @@
+{{- if .Values.zabbixProxy.persistentVolume.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "zabbix.proxy.fullname" . }}
+spec:
+  accessModes: {{ .Values.zabbixProxy.persistentVolume.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.zabbixProxy.persistentVolume.size }}
+  storageClassName: {{ .Values.zabbixProxy.persistentVolume.storageClass | quote }}
+{{- end -}}
