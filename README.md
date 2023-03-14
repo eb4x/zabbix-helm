@@ -39,19 +39,17 @@ Install requirement [kubectl](https://kubernetes.io/docs/reference/kubectl/overv
 
 # How to Deploy Zabbix in Kubernetes
 
-Clone this repository:
+Add the repository:
 
 ```bash
-cd ~
-git clone https://git.zabbix.com/scm/zt/kubernetes-helm.git
-cd kubernetes-helm
+helm repo add zabbix-chart-6.4  https://cdn.zabbix.com/zabbix/integrations/kubernetes-helm/6.4
 
 ```
 
 Export default values of chart ``helm-zabbix`` to file ``$HOME/zabbix_values.yaml``:
 
 ```bash
-helm show values . > $HOME/zabbix_values.yaml
+helm show values zabbix-chart-6.4/zabbix-helm-chrt > $HOME/zabbix_values.yaml
 ```
 Change the values according to the environment in the file ``$HOME/zabbix_values.yaml``.
 
@@ -71,7 +69,7 @@ kubectl create namespace monitoring
 Deploy Zabbix in the Kubernetes cluster. (Update the YAML files paths if necessary).
 
 ```bash
-helm install zabbix . --dependency-update -f $HOME/zabbix_values.yaml -n monitoring
+helm install zabbix zabbix-chart-6.4/zabbix-helm-chrt --dependency-update -f $HOME/zabbix_values.yaml -n monitoring
 
 ```
 
@@ -147,7 +145,7 @@ The following tables lists the main configurable parameters of the chart and the
 | zabbixProxy.enabled | bool | `false` | Enables use of Zabbix proxy |
 | zabbixProxy.resources | object | `{}` | Set resources requests/limits for Zabbix proxy |
 | zabbixProxy.image.repository | string | `"zabbix/zabbix-proxy-sqlite3"` | Zabbix proxy Docker image name |
-| zabbixProxy.image.tag | string | `"alpine-trunk"` | Tag of Docker image of Zabbix proxy |
+| zabbixProxy.image.tag | string | `"alpine-6.4.0"` | Tag of Docker image of Zabbix proxy |
 | zabbixProxy.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixProxy.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images |
 | zabbixProxy.env.ZBX_PROXYMODE | int | `0` | The variable allows to switch Zabbix proxy mode. Bu default, value is 1 - passive proxy. Allowed values are 0 and 1. |
@@ -183,7 +181,7 @@ The following tables lists the main configurable parameters of the chart and the
 | zabbixAgent.volumes | list | `[]`  | Add additional volumes to be mounted |
 | zabbixAgent.volumeMounts | list | `[]` | Add additional volumes to be mounted |
 | zabbixAgent.image.repository | string | `"zabbix/zabbix-agent2"` | Zabbix agent Docker image name |
-| zabbixAgent.image.tag | string | `"alpine-trunk"` | Tag of Docker image of Zabbix agent |
+| zabbixAgent.image.tag | string | `"alpine-6.4.0"` | Tag of Docker image of Zabbix agent |
 | zabbixAgent.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixAgent.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images |
 | zabbixAgent.env.ZBX_HOSTNAME | string | `"zabbix-agent"` | Zabbix agent hostname Case sensitive hostname |

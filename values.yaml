@@ -30,13 +30,13 @@ zabbixProxy:
     ## Zabbix proxy Docker image name
     repository: zabbix/zabbix-proxy-sqlite3
     ## Tag of Docker image of Zabbix proxy
-    tag: alpine-trunk
+    tag: alpine-6.4.0
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
 
   env:
-    ## The variable allows to switch Zabbix proxy mode. Bu default, value is 1 - passive proxy. Allowed values are 0 and 1.
+    ## The variable allows to switch Zabbix proxy mode. Bu default, value is 0 - active proxy. Allowed values are 0 and 1.
     - name: ZBX_PROXYMODE
       value: 0
     ## Zabbix proxy hostname
@@ -63,10 +63,7 @@ zabbixProxy:
     ## The variable enable communication with Zabbix Java Gateway to collect Java related checks
     - name: ZBX_JAVAGATEWAY_ENABLE
       value: false
-    ## How often proxy retrieves configuration data from Zabbix server in seconds. Active proxy parameter. Ignored for passive proxies.
-    - name: ZBX_CONFIGFREQUENCY
-      value: 60
-    ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/5.4/agent/alpine#other-variables
+    ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.4/Dockerfiles/proxy-sqlite3#other-variables
     ## For example:
     ## The variable is list of comma separated loadable Zabbix modules.
     ## - name: ZBX_LOADMODULE
@@ -200,7 +197,7 @@ zabbixAgent:
     ## Zabbix agent Docker image name
     repository: zabbix/zabbix-agent2
     ## Tag of Docker image of Zabbix agent
-    tag: alpine-trunk
+    tag: alpine-6.4.0
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
@@ -226,7 +223,7 @@ zabbixAgent:
       ## The variable is used to specify timeout for processing checks. By default, value is 4.
     - name: ZBX_TIMEOUT
       value: 4
-    ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/5.4/agent/alpine#other-variables
+    ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.4/Dockerfiles/agent2/alpine#other-variables
     ## For example:
     ## The variable is comma separated list of allowed Zabbix server or proxy hosts for connections to Zabbix agent container. You may specify port.
     ## - name: ZBX_ACTIVESERVERS 
