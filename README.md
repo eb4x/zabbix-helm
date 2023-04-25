@@ -144,10 +144,10 @@ The following tables lists the main configurable parameters of the chart and the
 | zabbixProxy.enabled | bool | `false` | Enables use of Zabbix proxy |
 | zabbixProxy.resources | object | `{}` | Set resources requests/limits for Zabbix proxy |
 | zabbixProxy.image.repository | string | `"zabbix/zabbix-proxy-sqlite3"` | Zabbix proxy Docker image name |
-| zabbixProxy.image.tag | string | `"alpine-6.0.16"` | Tag of Docker image of Zabbix proxy |
+| zabbixProxy.image.tag | string | `"alpine-6.0.17"` | Tag of Docker image of Zabbix proxy |
 | zabbixProxy.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixProxy.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images |
-| zabbixProxy.env.ZBX_PROXYMODE | int | `0` | The variable allows to switch Zabbix proxy mode. Bu default, value is 1 - passive proxy. Allowed values are 0 and 1. |
+| zabbixProxy.env.ZBX_PROXYMODE | int | `0` | The variable allows to switch Zabbix proxy mode. By default, value is 0 - active proxy. Allowed values are 0 - active proxy and 1 - passive proxy. |
 | zabbixProxy.env.ZBX_SERVER_HOST | string | `"127.0.0.1"` | Zabbix server host |
 | zabbixProxy.env.ZBX_SERVER_PORT | int | `10051` | Zabbix server port |
 | zabbixProxy.env.ZBX_DEBUGLEVEL | int | `3` |  The variable is used to specify debug level. By default, value is 3|
@@ -180,14 +180,12 @@ The following tables lists the main configurable parameters of the chart and the
 | zabbixAgent.volumes | list | `[]`  | Add additional volumes to be mounted |
 | zabbixAgent.volumeMounts | list | `[]` | Add additional volumes to be mounted |
 | zabbixAgent.image.repository | string | `"zabbix/zabbix-agent2"` | Zabbix agent Docker image name |
-| zabbixAgent.image.tag | string | `"alpine-6.0.16"` | Tag of Docker image of Zabbix agent |
+| zabbixAgent.image.tag | string | `"alpine-6.0.17"` | Tag of Docker image of Zabbix agent |
 | zabbixAgent.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixAgent.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images |
-| zabbixAgent.env.ZBX_HOSTNAME | string | `"zabbix-agent"` | Zabbix agent hostname Case sensitive hostname |
 | zabbixAgent.env.ZBX_SERVER_HOST | string | `"0.0.0.0/0"` | Zabbix server host |
 | zabbixAgent.env.ZBX_SERVER_PORT | int | `10051` | Zabbix server port |
 | zabbixAgent.env.ZBX_PASSIVE_ALLOW | bool | `true` | This variable is boolean (true or false) and enables or disables feature of passive checks. By default, value is true |
-| zabbixAgent.env.ZBX_PASSIVESERVERS | string | `"0.0.0.0/0"` | The variable is comma separated list of allowed Zabbix server or proxy hosts for connections to Zabbix agent container |
 | zabbixAgent.env.ZBX_ACTIVE_ALLOW | bool | `false` | This variable is boolean (true or false) and enables or disables feature of active checks |
 | zabbixAgent.env.ZBX_DEBUGLEVEL | int | `3` |  The variable is used to specify debug level. By default, value is 3|
 | zabbixAgent.env.ZBX_TIMEOUT | int | 4 |  The variable is used to specify timeout for processing checks. By default, value is 4|
