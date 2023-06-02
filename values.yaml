@@ -32,7 +32,7 @@ zabbixProxy:
     ## Zabbix proxy Docker image name
     repository: zabbix/zabbix-proxy-sqlite3
     ## Tag of Docker image of Zabbix proxy
-    tag: alpine-6.0.17
+    tag: alpine-6.0.18
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
@@ -202,7 +202,7 @@ zabbixAgent:
     ## Zabbix agent Docker image name
     repository: zabbix/zabbix-agent2
     ## Tag of Docker image of Zabbix agent
-    tag: alpine-6.0.17
+    tag: alpine-6.0.18
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images
     pullSecrets: []
