@@ -43,7 +43,6 @@ Add the repository:
 
 ```bash
 helm repo add zabbix-chart-6.4  https://cdn.zabbix.com/zabbix/integrations/kubernetes-helm/6.4
-
 ```
 
 Export default values of chart ``helm-zabbix`` to file ``$HOME/zabbix_values.yaml``:
@@ -66,11 +65,16 @@ Create the namespaces ``monitoring`` if it not exists in cluster.
 kubectl create namespace monitoring
 ```
 
-Deploy Zabbix in the Kubernetes cluster. (Update the YAML files paths if necessary).
+Deploy Zabbix in the Kubernetes cluster (update the YAML files paths if necessary).
 
 ```bash
 helm install zabbix zabbix-chart-6.4/zabbix-helm-chrt --dependency-update -f $HOME/zabbix_values.yaml -n monitoring
+```
 
+Get the token automatically created for service account.
+
+```bash
+kubectl get secret zabbix-service-account -n monitoring -o jsonpath={.data.token} | base64 -d
 ```
 
 View the pods.
