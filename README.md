@@ -163,7 +163,7 @@ The following table lists the main configurable parameters of the chart and thei
 | zabbixProxy.enabled | bool | `false` | Enables use of Zabbix proxy |
 | zabbixProxy.resources | object | `{}` | Set resources requests/limits for Zabbix proxy |
 | zabbixProxy.image.repository | string | `"zabbix/zabbix-proxy-sqlite3"` | Zabbix proxy Docker image name |
-| zabbixProxy.image.tag | string | `"alpine-6.0.19"` | Tag of Docker image of Zabbix proxy |
+| zabbixProxy.image.tag | string | `"alpine-6.0.21"` | Tag of Docker image of Zabbix proxy |
 | zabbixProxy.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixProxy.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images. Secrets must be manually created in the namespace. |
 | zabbixProxy.env.ZBX_PROXYMODE | int | `0` | This variable allows switching Zabbix proxy mode. By default, the value is 0 - active proxy. Allowed values are 0 - active proxy and 1 - passive proxy. |
@@ -198,7 +198,7 @@ The following table lists the main configurable parameters of the chart and thei
 | zabbixAgent.volumes | list | `[]`  | Add additional volumes to be mounted |
 | zabbixAgent.volumeMounts | list | `[]` | Add additional volumes to be mounted |
 | zabbixAgent.image.repository | string | `"zabbix/zabbix-agent2"` | Zabbix agent Docker image name |
-| zabbixAgent.image.tag | string | `"alpine-6.0.19"` | Tag of Docker image of Zabbix agent |
+| zabbixAgent.image.tag | string | `"alpine-6.0.21"` | Tag of Docker image of Zabbix agent |
 | zabbixAgent.image.pullPolicy | string | `"IfNotPresent"` | Pull policy of Docker image |
 | zabbixAgent.image.pullSecrets | list | `[]` | List of dockerconfig secrets names to use when pulling images. Secrets must be manually created in the namespace. |
 | zabbixAgent.env.ZBX_SERVER_HOST | string | `"0.0.0.0/0"` | Zabbix server host |
