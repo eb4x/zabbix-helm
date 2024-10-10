@@ -10,6 +10,10 @@ Zabbix agent installed:  "{{ .Values.zabbixAgent.image.repository }}:{{ .Values.
 Zabbix proxy installed:  "{{ .Values.zabbixProxy.image.repository }}:{{ .Values.zabbixProxy.image.tag }}"
 {{- end }}
 
+{{- if .Values.zabbixJavaGateway.enabled }}
+Zabbix Java gateway installed:  "{{ .Values.zabbixJavaGateway.image.repository }}:{{ .Values.zabbixJavaGateway.image.tag }}"
+{{- end }}
+
 Annotations:
 app.kubernetes.io/name: {{ include "zabbix.fullname" . }}
 helm.sh/chart: {{ include "zabbix.chart" . }}
@@ -19,7 +23,7 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 
 {{ if .Values.serviceAccount.create}}
-Service account created: 
+Service account created:
     {{ default (include "zabbix.fullname" .) .Values.serviceAccount.name -}}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}

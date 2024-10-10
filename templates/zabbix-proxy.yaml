@@ -58,6 +58,24 @@ spec:
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
+            {{- if .Values.zabbixJavaGateway.enabled }}
+            - name: ZBX_JAVAGATEWAY_ENABLE
+              value: "true"
+            - name: ZBX_JAVAGATEWAY
+              value: {{ template "zabbix.javaGateway.fullname" . }}
+            - name: ZBX_JAVAGATEWAYPORT
+              value: {{ .Values.zabbixJavaGateway.service.port | quote }}
+            {{- $exists := false }}
+            {{- range .Values.zabbixProxy.env }}
+              {{- if eq .name "ZBX_STARTJAVAPOLLERS" }}
+                {{- $exists = true }}
+              {{- end }}
+            {{- end }}
+            {{- if not $exists }}
+            - name: ZBX_STARTJAVAPOLLERS
+              value: "5"
+            {{- end }}
+            {{- end }}
       {{- if .Values.zabbixProxy.image.pullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.zabbixProxy.image.pullSecrets | indent 6 }}

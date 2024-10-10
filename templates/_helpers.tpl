@@ -29,9 +29,14 @@ If release name contains chart name it will be used as a full name.
 {{- printf "%s-proxy" (include "zabbix.fullname" .) -}}
 {{- end }}
 
-{{/* Fullname suffixed with proxy */}}
+{{/* Fullname suffixed with agent */}}
 {{- define "zabbix.agent.fullname" -}}
 {{- printf "%s-agent" (include "zabbix.fullname" .) -}}
+{{- end }}
+
+{{/* Fullname suffixed with java-gateway */}}
+{{- define "zabbix.javaGateway.fullname" -}}
+{{- printf "%s-java-gateway" (include "zabbix.fullname" .) -}}
 {{- end }}
 
 {{/*
