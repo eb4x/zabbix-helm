@@ -63,9 +63,9 @@ zabbixProxy:
     ## Cache size
     - name: ZBX_CACHESIZE
       value: 128M
-    ## The variable enable communication with Zabbix Java Gateway to collect Java related checks
-    - name: ZBX_JAVAGATEWAY_ENABLE
-      value: false
+    # This variable is specified amount of pre-forked instances of Java pollers. By default, value is 5 when zabbixJavaGateway enable.
+    # - name: ZBX_STARTJAVAPOLLERS
+    #   value: 0
     ## How often the proxy retrieves configuration data from Zabbix server in seconds. Active proxy parameter. Ignored for passive proxies.
     - name: ZBX_PROXYCONFIGFREQUENCY
       value: 10
@@ -112,7 +112,6 @@ zabbixProxy:
     externalIPs: []
     ## Loadbalancer IP
     ## Only use if service.type is "LoadBalancer"
-    ##
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
 
@@ -322,3 +321,80 @@ zabbixAgent:
     pspEnabled: false
     pspAnnotations: {}
 
+## **Zabbix Java Gateway** configurations
+zabbixJavaGateway:
+  ## Enables use of **Zabbix Java Gateway**
+  enabled: false
+  containerSecurityContext: {}
+  ## Resource Management for Pods and Containers.
+  ## More details: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers
+  resources: {}
+  image:
+    ## Zabbix Java Gateway Docker image name.
+    repository: zabbix/zabbix-java-gateway
+    ## Tag of Docker image of Zabbix Java Gateway Docker
+    tag: alpine-7.0.4
+    pullPolicy: IfNotPresent
+    ## List of dockerconfig secrets names to use when pulling images. Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ##      https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry
+    pullSecrets: []
+
+  env:
+    ## This variable is specified amount of pollers. By default, value is 5
+    - name: ZBX_START_POLLERS
+      value: 5
+    ## This variable is used to specify timeout for outgoing connections. By default, value is 3
+    - name: ZBX_TIMEOUT
+      value: 3
+    ## This variable is used to specify log level. By default, value is info. Possible values: trace, debug, info, want, error, all, off
+    - name: ZBX_DEBUGLEVEL
+      value: info
+    ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/7.0/Dockerfiles/java-gateway/alpine
+
+  livenessProbe:
+    tcpSocket:
+      port: zabbix-jmx
+    timeoutSeconds: 3
+    failureThreshold: 3
+    periodSeconds: 10
+    successThreshold: 1
+
+  readinessProbe: {}
+
+  startupProbe:
+    tcpSocket:
+      port: zabbix-jmx
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 5
+    successThreshold: 1
+
+  service:
+    annotations: {}
+    labels: {}
+    ## Type of service for Zabbix Java Gateway
+    type: ClusterIP
+    ## Port to expose service
+    port: 10052
+    externalIPs: []
+    ## Loadbalancer IP
+    ## Only use if service.type is "LoadBalancer"
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    loadBalancerClass: ""
+    sessionAffinity: None
+
+  ## The startupProbe, livenessProbe, readinessProbe variables
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+
+
+  ## Node selector for Zabbix Java Gateway
+  nodeSelector: {}
+
+  ## Tolerations configurations for Zabbix Java Gateway
+  tolerations: {}
+
+  ## Affinity configurations for Zabbix Java Gateway
+  affinity: {}
