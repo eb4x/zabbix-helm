@@ -251,7 +251,7 @@ zabbixAgent:
     ## List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/trunk/Dockerfiles/agent2/alpine#other-variables
     ## For example:
     ## The variable is comma separated list of allowed Zabbix server or proxy hosts for connections to Zabbix agent 2 container. You may specify port of Zabbix server or Zabbix proxy in such syntax: zabbix-server:10061,zabbix-proxy:10072
-    ## - name: ZBX_ACTIVESERVERS 
+    ## - name: ZBX_ACTIVESERVERS
     ##   value: ''
     ## The variable is comma separated list of allowed Zabbix server or proxy hosts for connections to Zabbix agent 2 container.
     ## - name: ZBX_PASSIVESERVERS
@@ -333,7 +333,7 @@ zabbixJavaGateway:
     ## Zabbix Java Gateway Docker image name.
     repository: zabbix/zabbix-java-gateway
     ## Tag of Docker image of Zabbix Java Gateway Docker
-    tag: alpine-7.0.4
+    tag: alpine-trunk
     pullPolicy: IfNotPresent
     ## List of dockerconfig secrets names to use when pulling images. Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
